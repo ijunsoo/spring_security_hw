@@ -34,6 +34,7 @@
                 <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                     <a class="nav-link" th:href="@{/admin/dashboard}">관리자</a>
                 </li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/user/password}">비밀번호 변경</a></li>
             </ul>
             <form th:action="@{/logout}" method="post" class="d-flex">
                 <button class="btn btn-outline-light btn-sm px-3">로그아웃</button>
@@ -43,6 +44,12 @@
 </nav>
 
 <div class="container">
+    <!-- 비밀번호 변경 등 작업 완료 시 표시되는 플래시 메시지 -->
+    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span th:text="${successMessage}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
     <!-- Welcome Card -->
     <div class="welcome-card p-4 mb-4">
         <h4 class="fw-bold mb-1">환영합니다!</h4>
@@ -78,7 +85,16 @@
                 <a th:href="@{/admin/dashboard}" class="btn btn-warning btn-sm mt-auto">바로가기</a>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card stat-card p-4 h-100">
+                <h6 class="fw-bold">비밀번호 변경</h6>
+                <p class="text-muted small mb-3">현재 비밀번호 확인 후 변경합니다.</p>
+                <a th:href="@{/user/password}" class="btn btn-dark btn-sm mt-auto">바로가기</a>
+            </div>
+        </div>
     </div>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
