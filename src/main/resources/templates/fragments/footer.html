@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!--
+  실습 증적용 푸터 프래그먼트.
+  모든 View 하단에 학번·성명·실습 수행 일시를 표시한다.
+  서버 렌더링 시각(#temporals.createNow())을 기본값으로 출력하고,
+  JS 로 1초마다 갱신하여 실시간 시계로 동작시킨다.
+-->
+<footer th:fragment="footer" class="text-center text-muted py-4 mt-5 border-top">
+    <small>
+        실습 수행 일시:
+        <span id="liveClock"
+              th:text="${#temporals.format(#temporals.createNow(), 'yyyy년 MM월 dd일 HH:mm:ss')}">--</span>
+        &nbsp;│&nbsp; 학번: <strong>2171193</strong>
+        &nbsp;│&nbsp; 성명: <strong>이준수</strong>
+    </small>
+    <script>
+        (function () {
+            const el = document.getElementById('liveClock');
+            if (!el) return;
+            const days = ['일', '월', '화', '수', '목', '금', '토'];
+            function tick() {
+                const d = new Date();
+                const p = n => String(n).padStart(2, '0');
+                const ampm = d.getHours() < 12 ? '오전' : '오후';
+                let h = d.getHours() % 12;
+                if (h === 0) h = 12;
+                el.textContent =
+                    `${d.getFullYear()}년 ${p(d.getMonth() + 1)}월 ${p(d.getDate())}일 `
+                    + `(${days[d.getDay()]}) ${ampm} ${p(h)}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+            }
+            tick();
+            setInterval(tick, 1000);
+        })();
+    </script>
+</footer>
+</body>
+</html>
