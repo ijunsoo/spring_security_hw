@@ -41,6 +41,12 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
+        <!-- Bean Validation (@Valid, @NotBlank, @Min, @Size) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
         <!-- Thymeleaf + Spring Security 통합 -->
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
